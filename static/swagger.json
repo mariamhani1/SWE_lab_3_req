@@ -1,0 +1,125 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Doctors Appointment API",
+    "description": "API for managing doctor appointments.",
+    "version": "1.0.0"
+  },
+  "host": "localhost:5000",
+  "basePath": "/api",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/doctors": {
+      "get": {
+        "summary": "Get all doctors",
+        "responses": {
+          "200": {
+            "description": "A list of doctors.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Doctor"
+              }
+            }
+          },
+          "404": {
+            "description": "No doctors found."
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a new doctor",
+        "parameters": [
+          {
+            "name": "doctor",
+            "in": "body",
+            "description": "Doctor object to add.",
+            "schema": {
+              "$ref": "#/definitions/Doctor"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Doctor added successfully."
+          }
+        }
+      }
+    },
+    "/doctor/{id}": {
+      "put": {
+        "summary": "Update doctor by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID of the doctor to update."
+          },
+          {
+            "name": "doctor",
+            "in": "body",
+            "description": "Doctor object to update.",
+            "schema": {
+              "$ref": "#/definitions/Doctor"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Doctor updated successfully."
+          },
+          "404": {
+            "description": "Doctor not found."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete doctor by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID of the doctor to delete."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Doctor deleted successfully."
+          },
+          "404": {
+            "description": "Doctor not found."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Doctor": {
+      "type": "object",
+      "properties": {
+        "doctor_name": {
+          "type": "string",
+          "example": "Mohamed Hany"
+        },
+        "Speciality": {
+          "type": "string",
+          "example": "Gastroenterologist"
+        },
+        "session_price": {
+          "type": "string",
+          "example": "500"
+        },
+        "Address": {
+          "type": "string",
+          "example": "New Cairo"
+        }
+      }
+    }
+  }
+}
